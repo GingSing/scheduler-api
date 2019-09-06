@@ -22,7 +22,7 @@ wss.on("connection", socket => {
 
 function updateAppointment(id, interview) {
   wss.clients.forEach(function eachClient(client) {
-    if (client.readyState === WebSocket.OPEN && client !==) {
+    if (client.readyState === WebSocket.OPEN && client) {
       client.send(
         JSON.stringify({
           type: "SET_INTERVIEW",
