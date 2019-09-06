@@ -13,13 +13,16 @@ wss.on("connection", socket => {
 
     if (event.data === "ping") {
       socket.send(JSON.stringify("pong"));
+    } else if (event.type === "SET_INTERVIEW") {
+      let { id, interview } = event;
+      updateAppointment(id, interview);
     }
   };
 });
 
 function updateAppointment(id, interview) {
   wss.clients.forEach(function eachClient(client) {
-    if (client.readyState === WebSocket.OPEN) {
+    if (client.readyState === WebSocket.OPEN && client !==) {
       client.send(
         JSON.stringify({
           type: "SET_INTERVIEW",
